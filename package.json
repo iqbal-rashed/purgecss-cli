@@ -1,6 +1,6 @@
 {
   "name": "purgecss-cli",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "CLI to remove unused CSS (TypeScript, cosmiconfig, interactive prompts, watch, minify, reports)",
   "type": "module",
   "bin": {

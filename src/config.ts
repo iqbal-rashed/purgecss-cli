@@ -13,8 +13,8 @@ export async function maybeInitConfig() {
     return;
   }
   const sample: Required<Config> = {
-    content: ["src/**/*.{html,js,jsx,ts,tsx,vue,svelte,md,mdx}"],
-    css: ["dist/**/*.css"],
+    content: ["**/*.{html,js,jsx,ts,tsx,vue,svelte,md,mdx}"],
+    css: ["**/*.css"],
     out: "pruned/",
     tailwind: false,
     safelist: [],
@@ -75,13 +75,13 @@ export async function promptForMissing(current: Config): Promise<Config> {
         type: "text",
         name: "content",
         message: "Content globs (space/comma separated)",
-        initial: "src/**/*.{html,js,jsx,ts,tsx,vue,svelte,md,mdx}",
+        initial: "**/*.{html,js,jsx,ts,tsx,vue,svelte,md,mdx}",
       },
       needCss && {
         type: "text",
         name: "css",
         message: "CSS globs (space/comma separated)",
-        initial: "dist/**/*.css",
+        initial: "**/*.css",
       },
     ].filter(Boolean) as prompts.PromptObject[]
   );
