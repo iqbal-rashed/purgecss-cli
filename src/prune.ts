@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import chalk from "chalk";
 import * as csso from "csso";
-import { Config, RunReport } from "./types.ts";
+import { Config, RunReport } from "./types";
 import {
   backupOnce,
   buildSafelist,
@@ -12,7 +12,7 @@ import {
   formatSize,
   tailwindExtractor,
   writeJson,
-} from "./utils.ts";
+} from "./utils";
 
 /** Return file paths (strings) - matches PurgeCSS's `content: string[]` */
 export async function readContentFiles(

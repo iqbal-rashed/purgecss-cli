@@ -1,10 +1,10 @@
 {
-  "name": "prune-css",
-  "version": "0.5.0",
+  "name": "purgecss-cli",
+  "version": "0.6.0",
   "description": "CLI to remove unused CSS (TypeScript, cosmiconfig, interactive prompts, watch, minify, reports)",
   "type": "module",
   "bin": {
-    "prune-css": "dist/cli.js"
+    "purgecss-cli": "dist/cli.cjs"
   },
   "keywords": [
     "css",
@@ -16,26 +16,40 @@
     "typescript"
   ],
   "license": "MIT",
+  "author": "Rashed Iqbal <dev.rashediqbal@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iqbal-rashed/purgecss-cli.git"
+  },
+  "homepage": "https://github.com/iqbal-rashed/purgecss-cli#readme",
+  "bugs": {
+    "url": "https://github.com/iqbal-rashed/purgecss-cli/issues"
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsup",
     "dev": "tsx src/cli.ts",
-    "link": "npm run build && npm link"
+    "link": "npm run build && npm link",
+    "example": "npm run build && node dist/cli.cjs -c example/test.html -s example/test.css -o example/out.css "
   },
   "dependencies": {
-    "chalk": "^5.3.0",
+    "chalk": "4.1.2",
     "chokidar": "^3.6.0",
     "commander": "^12.1.0",
     "cosmiconfig": "^9.0.0",
     "csso": "^5.0.5",
     "fast-glob": "^3.3.2",
-    "ora": "^8.0.1",
+    "ora": "5.4.1",
     "prompts": "^2.4.2",
     "purgecss": "^6.0.0"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/csso": "^5.0.4",
     "@types/node": "^22.7.4",
     "@types/prompts": "^2.4.9",
+    "tsup": "^8.5.0",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }

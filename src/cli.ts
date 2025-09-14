@@ -2,13 +2,13 @@
 import { program } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
-import ora from "ora";
-import { CLIOptions } from "./types.ts";
-import { buildEffectiveOptions, maybeInitConfig } from "./config.ts";
-import { runOnce } from "./prune.ts";
+import * as ora from "ora";
+import { CLIOptions } from "./types";
+import { buildEffectiveOptions, maybeInitConfig } from "./config";
+import { runOnce } from "./prune";
 
 program
-  .name("prune-css")
+  .name("purgecss-cli")
   .description(
     "Remove unused CSS using PurgeCSS (cosmiconfig + interactive prompts)"
   )
@@ -51,14 +51,14 @@ program
     "Write a JSON report with stats/rejected (e.g. reports/prune.json)"
   )
   .option("--config <file>", "Path to a config file (js/json/yaml)")
-  .option("--init", "Create a starter prune-css.config.json in cwd", false)
+  .option("--init", "Create a starter purgecss-cli.config.json in cwd", false)
   .option("--verbose", "Extra logging", false)
   .showHelpAfterError(true);
 
 program.parse(process.argv);
 const opts = program.opts<CLIOptions>();
 
-const spinner = ora({ spinner: "dots" });
+const spinner = (ora.default || ora)({ spinner: "dots" });
 
 (async () => {
   try {

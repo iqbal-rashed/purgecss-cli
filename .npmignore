@@ -1,0 +1,16 @@
+# Exclude test and config files from npm package
+src/
+example/
+coverage/
+*.log
+*.tsbuildinfo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Keep only dist and essential docs
+!dist/
+!package.json
+!readme.md
+!LICENSE

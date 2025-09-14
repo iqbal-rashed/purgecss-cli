@@ -2,19 +2,14 @@ import path from "path";
 import chalk from "chalk";
 import { cosmiconfig } from "cosmiconfig";
 import prompts from "prompts";
-import { CLIOptions, Config } from "./types.ts";
-import {
-  ensureDir,
-  parseCSVish,
-  readJsonIfExists,
-  writeJson,
-} from "./utils.ts";
+import { CLIOptions, Config } from "./types";
+import { ensureDir, parseCSVish, readJsonIfExists, writeJson } from "./utils";
 
 export async function maybeInitConfig() {
-  const target = path.resolve(process.cwd(), "prune-css.config.json");
+  const target = path.resolve(process.cwd(), "purgecss-cli.config.json");
   const exists = await readJsonIfExists(target);
   if (exists) {
-    console.log(chalk.yellow("prune-css.config.json already exists."));
+    console.log(chalk.yellow("purgecss-cli.config.json already exists."));
     return;
   }
   const sample: Required<Config> = {
@@ -32,11 +27,11 @@ export async function maybeInitConfig() {
     watch: false,
   };
   await writeJson(target, sample);
-  console.log(chalk.green("Created prune-css.config.json"));
+  console.log(chalk.green("Created purgecss-cli.config.json"));
 }
 
 export async function loadConfigWithCosmiconfig(cli: CLIOptions) {
-  const explorer = cosmiconfig("prune-css");
+  const explorer = cosmiconfig("purgecss-cli");
   if (cli.config) {
     const abs = path.resolve(process.cwd(), cli.config);
     return explorer.load(abs);

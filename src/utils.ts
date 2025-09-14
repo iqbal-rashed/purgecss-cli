@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import chalk from "chalk";
-import { Config, StrOrArr } from "./types.js";
+import { Config, StrOrArr } from "./types";
 
 export const tailwindExtractor = (content: string): string[] =>
   content.match(/[\w-:/%.]+(?<!:)/g) || [];
