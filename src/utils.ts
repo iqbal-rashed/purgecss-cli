@@ -8,11 +8,37 @@ export const tailwindExtractor = (content: string): string[] =>
 
 export function parseCSVish(input: StrOrArr): string[] {
   if (!input) return [];
-  const s = Array.isArray(input) ? input.join(" ") : String(input);
-  return s
-    .split(/[,\s]+/)
-    .map((x) => x.trim())
-    .filter(Boolean);
+  // If already an array, just trim entries without further splitting.
+  if (Array.isArray(input)) return input.map((x) => String(x).trim()).filter(Boolean);
+
+  // Split a single string by commas or whitespace, but do not split inside
+  // brace-expansions like **/*.{html,js}. This allows glob patterns to remain intact.
+  const s = String(input);
+  const parts: string[] = [];
+  let buf = "";
+  let braceDepth = 0;
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (ch === "{") {
+      braceDepth++;
+      buf += ch;
+      continue;
+    }
+    if (ch === "}" && braceDepth > 0) {
+      braceDepth--;
+      buf += ch;
+      continue;
+    }
+    // Treat comma or whitespace as delimiters only when not inside braces
+    if (braceDepth === 0 && (ch === "," || /\s/.test(ch))) {
+      if (buf.trim()) parts.push(buf.trim());
+      buf = "";
+      continue;
+    }
+    buf += ch;
+  }
+  if (buf.trim()) parts.push(buf.trim());
+  return parts;
 }
 
 export async function ensureDir(dir?: string) {
